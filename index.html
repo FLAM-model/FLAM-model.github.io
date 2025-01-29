@@ -56,7 +56,8 @@
                                 that are not seen during training.
                             </p>
                             <p class="lead">
-                                Click on the image to enlarge it. Please allow a few seconds to load the audio files.
+                                Click on the image to enlarge it. Please allow a few seconds to load the video and
+                                audio.
                             </p>
                         </div>
                     </div>
@@ -75,6 +76,12 @@
         <div class="container" style="min-width:80%;">
             <!-- FLAM Detection Results on Real-world Examples -->
             <h2 class="text-primary my-4">FLAM Detection Results on Real-world Examples</h2>
+            <p class="lead">
+                We present the sound event detection results of FLAM on real-world audio examples that are not seen
+                during training. The following videos showcase the detection results of FLAM on the ASFX-SED dataset,
+                which contains a diverse set of sound events. We also include detection results of events that are not
+                present in the examples in red. The title of each video links to the corresponding YouTube video.
+            </p>
 
             <div class="row">
                 <!-- First Video (left) -->
@@ -371,6 +378,27 @@
             </div>
             <p class="text-center"><em>Sound event detection of FLAM on Audioset-Strong dataset</em></p>
 
+        </div>
+        <div class="container" style="min-width:80%;">
+            <h3>FLAM</h3>
+            <div class="col-md-12">
+                <div class="card border-0 h-100">
+                    <div class="col my-auto">
+                        <img src="files/hero-diagram.png" width="100%" class="center">
+                    </div>
+                    <div class="row w-100   px-3">
+                        <p class=" px-3">
+                            (Left) Traditional ALMs derive global audio and text embeddings, treating each
+                            ground-truth audio--text pair as a positive sample and all other pairs in the batch as
+                            negatives.
+                            (Right) FLAM instead processes frame-level audio features and trains on temporally
+                            labeled sound events paired with text descriptions. FLAM enables finer-grained localization
+                            of events based on text queries, yielding accurate open-vocabulary sound event detection.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </main>
 
