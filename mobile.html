@@ -37,23 +37,6 @@
                                 FLAM: Framewise Language-Audio Modeling
                             </h2>
                             <p class="lead">
-                                Recent multi-modal audio-language models (ALMs) excel at text-audio retrieval but
-                                struggle with frame-wise audio understanding. Prior works use temporal-aware labels or
-                                unsupervised training to improve frame-wise capabilities, but they still lack
-                                fine-grained labeling capability to pinpoint when an event occurs. While traditional
-                                sound event detection models can precisely localize events, they are limited to
-                                pre-defined categories, making them ineffective for real-world scenarios with
-                                out-of-distribution events. In this work, we introduce FLAM, an open-vocabulary
-                                contrastive audio-language model capable of localizing specific sound events. FLAM
-                                employs a memory-efficient and calibrated frame-wise objective with logit adjustment to
-                                address spurious correlations, such as event dependencies and label imbalances during
-                                training. To enable frame-wise supervision, we leverage a large-scale dataset with
-                                diverse audio events, LLM-generated captions and simulation. Experimental results and
-                                case studies demonstrate that FLAM significantly improves the open-vocabulary
-                                localization capability while maintaining strong performance in global retrieval and
-                                downstream tasks.
-                            </p>
-                            <p class="lead">
                                 On this page, we showcase the audio samples and sound event detection results from the
                                 FLAM experiments, as
                                 discussed in the paper, as well as FLAM detection results on real-world audio examples
@@ -121,48 +104,6 @@
                             <div class="text-center mb-3">
                                 <video width="100%" height="640" playsinline controls>
                                     <source src="files/sample_2.webm" type="video/webm">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <!-- Third Video (left) -->
-                <div class="col-md-6">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <!-- Link to YouTube -->
-                            <div class="text-center mb-3">
-                                <a href="https://www.youtube.com/embed/tA1s65o_kYM?start=47&end=57"
-                                    target="_blank">example 3</a>
-                            </div>
-                            <!-- Local Video -->
-                            <div class="text-center mb-3">
-                                <video width="100%" height="640" playsinline controls>
-                                    <source src="files/sample_3.webm" type="video/webm">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fourth Video (right) -->
-                <div class="col-md-6">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <!-- Link to YouTube -->
-                            <div class="text-center mb-3">
-                                <a href="https://www.youtube.com/embed/tA1s65o_kYM?start=23&end=33"
-                                    target="_blank">example 4</a>
-                            </div>
-                            <!-- Local Video -->
-                            <div class="text-center mb-3">
-                                <video width="100%" height="640" playsinline controls>
-                                    <source src="files/sample_4.webm" type="video/webm">
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
