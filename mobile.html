@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>FLAM: Framewise Language-Audio Modeling</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="config/bootstrap.min.css" />
+    <link rel="stylesheet" href="config/ionicons.css" />
+    <link rel="stylesheet" href="config/theme.css" />
+    <link rel="stylesheet" href="config/template3.css" />
+    <style>
+        /* Click-to-enlarge style */
+        .enlarge-on-click {
+            transition: transform 0.3s ease;
+            transform-origin: top center;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+        }
+
+        .enlarge-on-click.enlarged {
+            transform: scale(2.0);
+            z-index: 1000;
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target="#navbar1" data-offset="60">
+    <div class="container-fluid" style="min-width:80%;">
+        <div class="row">
+            <div class="col-12 p-0 bg-primary vh-40 py-5">
+                <div class="container" style="min-width:80%;">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 py-2 text-light">
+                            <h2 class="display-5 mb-3">
+                                FLAM: Framewise Language-Audio Modeling
+                            </h2>
+                            <p class="lead">
+                                Recent multi-modal audio-language models (ALMs) excel at text-audio retrieval but
+                                struggle with frame-wise audio understanding. Prior works use temporal-aware labels or
+                                unsupervised training to improve frame-wise capabilities, but they still lack
+                                fine-grained labeling capability to pinpoint when an event occurs. While traditional
+                                sound event detection models can precisely localize events, they are limited to
+                                pre-defined categories, making them ineffective for real-world scenarios with
+                                out-of-distribution events. In this work, we introduce FLAM, an open-vocabulary
+                                contrastive audio-language model capable of localizing specific sound events. FLAM
+                                employs a memory-efficient and calibrated frame-wise objective with logit adjustment to
+                                address spurious correlations, such as event dependencies and label imbalances during
+                                training. To enable frame-wise supervision, we leverage a large-scale dataset with
+                                diverse audio events, LLM-generated captions and simulation. Experimental results and
+                                case studies demonstrate that FLAM significantly improves the open-vocabulary
+                                localization capability while maintaining strong performance in global retrieval and
+                                downstream tasks.
+                            </p>
+                            <p class="lead">
+                                On this page, we showcase the audio samples and sound event detection results from the
+                                FLAM experiments, as
+                                discussed in the paper, as well as FLAM detection results on real-world audio examples
+                                that are not seen during training.
+                            </p>
+                            <p class="lead">
+                                Click on the image to enlarge it. Please allow a few seconds to load the video and
+                                audio.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary" id="navbar1">
+        <div class="container" style="min-width:83%;">
+            <a class="navbar-brand mr-1 mb-1 mt-0" href="#">FLAM Sample Page</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container" style="min-width:80%;">
+            <!-- FLAM Detection Results on Real-world Examples -->
+            <h2 class="text-primary my-4">FLAM Detection Results on Real-world Examples</h2>
+            <p class="lead">
+                We present the sound event detection results of FLAM on real-world audio examples that are not seen
+                during training. The following videos showcase the detection results of FLAM on the ASFX-SED dataset,
+                which contains a diverse set of sound events. We also include detection results of events that are not
+                present in the examples in red. The title of each video links to the corresponding YouTube video.
+            </p>
+
+            <div class="row">
+                <!-- First Video (left) -->
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <!-- Link to YouTube -->
+                            <div class="text-center mb-3">
+                                <a href="https://www.youtube.com/embed/ZsJz2TJAPjw?start=30&end=40"
+                                    target="_blank">example 1</a>
+                            </div>
+                            <!-- Local Video -->
+                            <div class="text-center mb-3">
+                                <video width="100%" height="640" playsinline controls>
+                                    <source src="files/sample_1.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Video (right) -->
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <!-- Link to YouTube -->
+                            <div class="text-center mb-3">
+                                <a href="https://www.youtube.com/embed/xIbceR97Ei8?start=30&end=40"
+                                    target="_blank">example 2</a>
+                            </div>
+                            <!-- Local Video -->
+                            <div class="text-center mb-3">
+                                <video width="100%" height="640" playsinline controls>
+                                    <source src="files/sample_2.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Third Video (left) -->
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <!-- Link to YouTube -->
+                            <div class="text-center mb-3">
+                                <a href="https://www.youtube.com/embed/tA1s65o_kYM?start=47&end=57"
+                                    target="_blank">example 3</a>
+                            </div>
+                            <!-- Local Video -->
+                            <div class="text-center mb-3">
+                                <video width="100%" height="640" playsinline controls>
+                                    <source src="files/sample_3.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fourth Video (right) -->
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <!-- Link to YouTube -->
+                            <div class="text-center mb-3">
+                                <a href="https://www.youtube.com/embed/tA1s65o_kYM?start=23&end=33"
+                                    target="_blank">example 4</a>
+                            </div>
+                            <!-- Local Video -->
+                            <div class="text-center mb-3">
+                                <video width="100%" height="640" playsinline controls>
+                                    <source src="files/sample_4.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="container" style="min-width:80%;">
+            <h3>FLAM</h3>
+            <div class="col-md-12">
+                <div class="card border-0 h-100">
+                    <div class="col my-auto">
+                        <img src="files/hero-diagram.png" width="100%" class="center">
+                    </div>
+                    <div class="row w-100   px-3">
+                        <p class=" px-3">
+                            (Left) Traditional ALMs derive global audio and text embeddings, treating each
+                            ground-truth audio--text pair as a positive sample and all other pairs in the batch as
+                            negatives.
+                            (Right) FLAM instead processes frame-level audio features and trains on temporally
+                            labeled sound events paired with text descriptions. FLAM enables finer-grained localization
+                            of events based on text queries, yielding accurate open-vocabulary sound event detection.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer" class="bg-dark text-light py-5">
+    </footer>
+
+    <script src="config/jquery.min.js"></script>
+    <script src="config/popper.min.js"></script>
+    <script src="config/bootstrap.min.js"></script>
+    <script src="config/scripts.js"></script>
+
+    <script>
+        // Toggle enlarge on click
+        function toggleEnlarge(img) {
+            img.classList.toggle("enlarged");
+        }
+    </script>
+</body>
+
+</html>
