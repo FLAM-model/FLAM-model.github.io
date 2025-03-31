@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Response to Reviewer bqpP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="config/bootstrap.min.css" />
+    <link rel="stylesheet" href="config/ionicons.css" />
+    <link rel="stylesheet" href="config/theme.css" />
+    <link rel="stylesheet" href="config/template3.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Response to Reviewer bqpP</h1>
+
+        <h2>Experiment Details</h2>
+        <p>
+            This page includes the results of additional ablation experiments of FLAM.
+            Two configurations of FLAM were used for the experiments:
+        <ul>
+            <li>FLAM - no global loss: The FLAM model trained without the global loss, only with the local loss.</li>
+            <li>FLAM - L=128: A FLAM model with a different audio encoder that outputs 128 frames for 10 seconds of
+                input.</li>
+        </ul>
+        The details of the FLAM - L=128 model are as follows: it uses the same HTSAT architecture as FLAM, but
+        we remove one swin-transformer layer, resulting in 1/4 of downsampling rate, thus outputting 128 frames (4x) of
+        output instead of 32 frames in FLAM. Similar to FLAM, we pretrain the new audio encoder with AudioSet
+        pretraining, and initialize the pretrained parameters for FLAM training. The new audio encoder has less
+        parameters but requires more compute in training because of the larger feature size.
+        </p>
+
+        <h2>Experiment Results</h2>
+
+        <p>
+            The results of the experiments are shown in the following figures.
+            Removing the global loss, although marginally improves the SED performance, significantly reduces the
+            retrieval performance and zero-shot classification performance.
+            Using the audio encoder with larger output resolution results in similar trade-off, where the SED
+            performance
+            is marginally improved but the retrieval and zero-shot classification performance are reduced.
+
+            Overall, we think that the original FLAM model achieves a good trade-off between the SED, retrieval, and
+            zero-shot classification performance, with sufficient temporal resolution.
+        </p>
+
+        <h2>Tables</h2>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12 mb-4">
+                        <figure class="figure">
+                            <img src="files/rebuttal/sed_bqpp.png" class="figure-img img-fluid" alt="SED BQPP Results">
+                            <figcaption class="figure-caption">SED Results</figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-md-12 mb-4">
+                        <figure class="figure">
+                            <img src="files/rebuttal/retrieval_bqpp.png" class="figure-img img-fluid"
+                                alt="Retrieval BQPP Results">
+                            <figcaption class="figure-caption">Retrieval Results</figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-md-12 mb-4">
+                        <figure class="figure">
+                            <img src="files/rebuttal/zero_shot_bqpp.png" class="figure-img img-fluid"
+                                alt="Zero-shot BQPP Results">
+                            <figcaption class="figure-caption">Zero-shot Classification Results</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>About the impact and intuition about logit scale</h2>
+
+        <p>
+            Intuitively, a smaller logit scale increases the cosine distance between negative frame and text embeddings
+            for the same loss effect. This helps the model capture finer distinctions in cosine similarity.
+            Experimentally, we clarify our findings in Figure 3: Performance in F1 drops more when we remove the
+            per-text bias (but retain the per-text scale), than when we remove the per-text scale (but retain the
+            per-text bias). So per-text logit bias plays a more significant role in performance than per-text logit
+            scale, which is still beneficial.
+        </p>
+        <p>
+            We train the text-dependent logit scale $\alpha^t$ in similar manner where another MLP appended to text
+            feature extractor, giving $\alpha^t(y) = \mathrm{MLP}^\alpha(E^t(y))$. Different in per-text bias, we update
+            $\mathrm{MLP}^\alpha$ via $\mathcal{L}_{\mathrm{SED}}$ in Eq. 4.
+        </p>
+
+        <h2>Impact Statement</h2>
+        <p>
+            This work introduces FLAM, a model for frame-wise audio-language alignment to improve sound event detection
+            using natural language queries. Our goal is to advance the field of multimodal learning by enabling
+            fine-grained and interpretable audio understanding. FLAM may benefit applications such as content indexing,
+            accessibility, and multimedia retrieval. While we do not foresee significant ethical risks, we encourage
+            responsible use of the model in real-world scenarios.
+        </p>
+
+    </div>
+
+    <script src="config/jquery.min.js"></script>
+    <script src="config/bootstrap.min.js"></script>
+</body>
+
+</html>

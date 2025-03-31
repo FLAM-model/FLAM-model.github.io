@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Response to Reviewer GGdQ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="config/bootstrap.min.css" />
+    <link rel="stylesheet" href="config/ionicons.css" />
+    <link rel="stylesheet" href="config/theme.css" />
+    <link rel="stylesheet" href="config/template3.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Response to Reviewer GGdQ</h1>
+
+        <h2>Experiment Details</h2>
+        <p>
+            This page includes the results of additional ablation experiments of FLAM.
+            Two configurations of FLAM were used for the experiments:
+        <ul>
+            <li>FLAM - 256 batch size: The FLAM model trained with a batch size of 256.</li>
+            <li>FLAM - 128 batch size: The FLAM model trained with a batch size of 128.</li>
+            <li>FLAM - no sigmoid loss: The FLAM model trained without the sigmoid in SED objective (see equation
+                below).</li>
+        </ul>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12 mb-4">
+                        <figure class="figure text-center">
+                            <img src="files/rebuttal/no_sigmoid_loss.jpg" class="figure-img img-fluid"
+                                alt="SED Objective without Sigmoid" style="width: 50%;">
+                            <figcaption class="figure-caption">SED Objective without Sigmoid</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p>
+            For the experiments involving smaller batch sizes, we trained the models for additional steps to ensure they
+            were exposed to approximately the same number of training samples as the baseline (batch size 512).
+        </p>
+        <p>
+            The model trained without sigmoid loss encountered instability during training, with gradients becoming
+            infinite around step 20k. As a result, training was terminated early. This highlights the importance of the
+            sigmoid loss for stable optimization. We report its performance based on the checkpoint at step 20k.
+        </p>
+
+        <h2>Experiment Results</h2>
+
+        <p>
+            The results of these ablation studies are shown in the figures below. Models trained with batch sizes of 256
+            and 128 achieved similar SED performance to the baseline, with only minor performance degradation at smaller
+            sizes—likely due to fewer negative samples per batch. In contrast, the model trained without sigmoid loss
+            failed to converge and exhibited significantly worse performance, underscoring the crucial role of the
+            sigmoid objective in enabling effective frame-level training.
+        </p>
+
+        <h2>Tables</h2>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12 mb-4">
+                        <figure class="figure">
+                            <img src="files/rebuttal/sed_ggdq.png" class="figure-img img-fluid" alt="SED GGdQ Results">
+                            <figcaption class="figure-caption">SED Results</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>FLAM Compared with Current State-of-the-Art</h2>
+        <figure class="figure">
+            <img src="files/rebuttal/sota_ggdq.png" class="figure-img img-fluid" alt="SOTA GGdQ Results">
+            <figcaption class="figure-caption">FLAM Compared with Current State-of-the-Art</figcaption>
+        </figure>
+
+        <p>
+            [1] Schmid, F., Primus, P., Morocutti, T., Greif, J., & Widmer, G. (2024). Improving audio spectrogram
+            transformers for sound event detection through multi-stage training. arXiv preprint arXiv:2408.00791.
+        </p>
+        <p>
+            [2] Li, X., Shao, N., & Li, X. (2024). Self-supervised audio teacher-student transformer for both clip-level
+            and frame-level tasks. IEEE/ACM Transactions on Audio, Speech, and Language Processing, 32, 1336-1351.
+        </p>
+        <p>
+            [3] Zhang, Y., & Togneri, R. (2025). Pseudo Strong Labels from Frame-Level Predictions for Weakly Supervised
+            Sound Event Detection. arXiv preprint arXiv:2501.03740.
+        </p>
+        <p>
+            Note: The model in [3] is not a strong-performing model, but this is the only paper we found that reports
+            results on the UrbanSED dataset.
+        </p>
+
+
+
+    </div>
+
+    <script src="config/jquery.min.js"></script>
+    <script src="config/bootstrap.min.js"></script>
+</body>
+
+</html>
