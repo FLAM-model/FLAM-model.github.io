@@ -45,6 +45,40 @@
                             <h2 class="display-5 mb-3">
                                 🍮 FLAM: Frame-Wise Language-Audio Modeling
                             </h2>
+
+                            <!-- Publication Links and Citation -->
+                            <div class="mb-4">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="d-flex flex-wrap gap-3 mb-3">
+                                            <a href="https://arxiv.org/abs/2505.05335" target="_blank"
+                                                class="btn btn-outline-light btn-lg">
+                                                <i class="ion-document-text"></i> arXiv Paper
+                                            </a>
+                                            <button class="btn btn-outline-light btn-lg" onclick="copyBibtex()"
+                                                id="bibtexBtn">
+                                                <i class="ion-clipboard"></i> Copy BibTeX
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- BibTeX Citation (initially hidden) -->
+                                <div class="collapse" id="bibtexCitation">
+                                    <div class="card bg-light text-dark p-3">
+                                        <small><strong>ICML 2025 Citation:</strong></small>
+                                        <pre class="mb-0" style="font-size: 0.8em;"><code>@inproceedings{
+wu2025flam,
+title={{FLAM}: Frame-Wise Language-Audio Modeling},
+author={Yusong Wu and Christos Tsirigotis and Ke Chen and Cheng-Zhi Anna Huang and Aaron Courville and Oriol Nieto and Prem Seetharaman and Justin Salamon},
+booktitle={Forty-second International Conference on Machine Learning},
+year={2025},
+url={https://openreview.net/forum?id=7fQohcFrxG}
+}</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
                             <p class="lead">
                                 Recent multi-modal audio-language models (ALMs) excel at text-audio retrieval but
                                 struggle with frame-wise audio understanding. Prior works use temporal-aware labels or
@@ -475,6 +509,44 @@
         // Toggle enlarge on click
         function toggleEnlarge(img) {
             img.classList.toggle("enlarged");
+        }
+
+        // Copy BibTeX citation to clipboard
+        function copyBibtex() {
+            const bibtex = `@inproceedings{
+wu2025flam,
+title={{FLAM}: Frame-Wise Language-Audio Modeling},
+author={Yusong Wu and Christos Tsirigotis and Ke Chen and Cheng-Zhi Anna Huang and Aaron Courville and Oriol Nieto and Prem Seetharaman and Justin Salamon},
+booktitle={Forty-second International Conference on Machine Learning},
+year={2025},
+url={https://openreview.net/forum?id=7fQohcFrxG}
+}`;
+
+            navigator.clipboard.writeText(bibtex).then(function () {
+                // Show success feedback
+                const btn = document.getElementById('bibtexBtn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="ion-checkmark"></i> Copied!';
+                btn.classList.remove('btn-outline-light');
+                btn.classList.add('btn-success');
+
+                // Show the citation card temporarily
+                const citation = document.getElementById('bibtexCitation');
+                citation.classList.add('show');
+
+                // Reset after 3 seconds
+                setTimeout(function () {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('btn-success');
+                    btn.classList.add('btn-outline-light');
+                    citation.classList.remove('show');
+                }, 3000);
+            }).catch(function (err) {
+                console.error('Could not copy text: ', err);
+                // Fallback: show the citation card so user can select and copy manually
+                const citation = document.getElementById('bibtexCitation');
+                citation.classList.toggle('show');
+            });
         }
     </script>
 </body>
