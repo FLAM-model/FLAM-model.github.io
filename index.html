@@ -23,6 +23,42 @@
             transform: scale(2.0);
             z-index: 1000;
         }
+
+        /* Custom spacing for author section */
+        .author-spacing {
+            line-height: 1.2;
+            margin-bottom: 0.25rem !important;
+        }
+
+        /* Header alignment overrides: ensure consistent left edge */
+        .header-block p {
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+            text-align: left;
+        }
+        .header-block .bibtex-card {
+            padding: 1rem;
+        }
+        /* Tighten author and institution spacing */
+        .header-block .author-spacing {
+            padding-top: 0.125rem;
+            padding-bottom: 0.125rem;
+            margin-bottom: 0.15rem !important;
+            font-size: 1.1rem;
+        }
+        .header-block .institution-spacing {
+            padding-top: 0.125rem;
+            padding-bottom: 0.125rem;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+        /* Reduce space before header ends */
+        #header-intro {
+            margin-bottom: 0;
+            padding-bottom: 0.25rem;
+        }
     </style>
     <script>
         // Check if the user is on a mobile device
@@ -38,36 +74,50 @@
 <body data-spy="scroll" data-target="#navbar1" data-offset="60">
     <div class="container-fluid" style="min-width:80%;">
         <div class="row">
-            <div class="col-12 p-0 bg-primary vh-40 py-5">
+            <div class="col-12 p-0 bg-light pt-4 pb-3">
                 <div class="container" style="min-width:80%;">
                     <div class="row">
-                        <div class="col-xl-12 col-lg-12 py-2 text-light">
-                            <h2 class="display-5 mb-3">
+                        <div class="col-xl-12 col-lg-12 py-2 text-dark header-block">
+                            <h2 class="mb-3 text-primary">
                                 🍮 FLAM: Frame-Wise Language-Audio Modeling
                             </h2>
 
-                            <!-- Publication Links and Citation -->
-                            <div class="mb-4">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="d-flex flex-wrap gap-3 mb-3">
-                                            <a href="https://arxiv.org/abs/2505.05335" target="_blank"
-                                                class="btn btn-outline-light btn-lg">
-                                                <i class="ion-document-text"></i> arXiv Paper
-                                            </a>
-                                            <button class="btn btn-outline-light btn-lg" onclick="copyBibtex()"
-                                                id="bibtexBtn">
-                                                <i class="ion-clipboard"></i> Copy BibTeX
-                                            </button>
-                                        </div>
-                                    </div>
+                            <!-- Authors -->
+                            <div class="mb-2">
+                                <p class="lead mb-1 author-spacing">
+                                    Yusong Wu<sup>1,2</sup>,
+                                    Christos Tsirigotis<sup>2</sup>,
+                                    Ke Chen<sup>1</sup>,
+                                    Cheng-Zhi Anna Huang<sup>3</sup>,
+                                    Aaron Courville<sup>2,4</sup>,
+                                    Oriol Nieto<sup>1</sup>,
+                                    Prem Seetharaman<sup>1</sup>,
+                                    Justin Salamon<sup>1</sup>
+                                </p>
+                                <p class="text-dark mb-1 institution-spacing">
+                                    <sup>1</sup>Adobe Research &nbsp;&nbsp;
+                                    <sup>2</sup>Mila - Quebec AI Institute, Université de Montréal &nbsp;&nbsp;
+                                    <sup>3</sup>Massachusetts Institute of Technology &nbsp;&nbsp;
+                                    <sup>4</sup>Canada CIFAR AI Chair
+                                </p>
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="text-dark mr-2" style="font-size: 1rem; font-weight: 500;">ICML 2025</span>
+                                    <a href="https://arxiv.org/abs/2505.05335" target="_blank"
+                                        class="btn btn-outline-primary btn-sm mr-2">
+                                        <i class="ion-document-text"></i> Paper
+                                    </a>
+                                    <button class="btn btn-outline-primary btn-sm" onclick="copyBibtex()"
+                                        id="bibtexBtn">
+                                        <i class="ion-clipboard"></i> BibTeX
+                                    </button>
                                 </div>
+                            </div>
 
-                                <!-- BibTeX Citation (initially hidden) -->
-                                <div class="collapse" id="bibtexCitation">
-                                    <div class="card bg-light text-dark p-3">
-                                        <small><strong>ICML 2025 Citation:</strong></small>
-                                        <pre class="mb-0" style="font-size: 0.8em;"><code>@inproceedings{
+                            <!-- BibTeX Citation (always visible) -->
+                            <div class="mb-3">
+                                <div class="card bg-white text-dark border bibtex-card">
+                                    <h5 class="mb-2">BibTeX</h5>
+                                    <pre class="mb-0" style="font-size: 0.8em; margin: 0;"><code>@inproceedings{
 wu2025flam,
 title={{FLAM}: Frame-Wise Language-Audio Modeling},
 author={Yusong Wu and Christos Tsirigotis and Ke Chen and Cheng-Zhi Anna Huang and Aaron Courville and Oriol Nieto and Prem Seetharaman and Justin Salamon},
@@ -77,33 +127,12 @@ url={https://openreview.net/forum?id=7fQohcFrxG}
 }</code></pre>
                                     </div>
                                 </div>
-                            </div>
 
-                            <p class="lead">
-                                Recent multi-modal audio-language models (ALMs) excel at text-audio retrieval but
-                                struggle with frame-wise audio understanding. Prior works use temporal-aware labels or
-                                unsupervised training to improve frame-wise capabilities, but they still lack
-                                fine-grained labeling capability to pinpoint when an event occurs. While traditional
-                                sound event detection models can precisely localize events, they are limited to
-                                pre-defined categories, making them ineffective for real-world scenarios with
-                                out-of-distribution events. In this work, we introduce FLAM, an open-vocabulary
-                                contrastive audio-language model capable of localizing specific sound events. FLAM
-                                employs a memory-efficient and calibrated frame-wise objective with logit adjustment to
-                                address spurious correlations, such as event dependencies and label imbalances during
-                                training. To enable frame-wise supervision, we leverage a large-scale dataset with
-                                diverse audio events, LLM-generated captions and simulation. Experimental results and
-                                case studies demonstrate that FLAM significantly improves the open-vocabulary
-                                localization capability while maintaining strong performance in global retrieval and
-                                downstream tasks.
-                            </p>
-                            <p class="lead">
+                            <p id="header-intro" class="lead text-dark">
                                 On this page, we showcase the audio samples and sound event detection results from the
                                 FLAM experiments, as
                                 discussed in the paper, as well as FLAM detection results on real-world audio examples
-                                that are not seen during training.
-                            </p>
-                            <p class="lead">
-                                Click on the image to enlarge it. Please allow a few seconds to load the video and
+                                that are not seen during training. Please allow a few seconds to load the video and
                                 audio.
                             </p>
                         </div>
@@ -113,10 +142,10 @@ url={https://openreview.net/forum?id=7fQohcFrxG}
         </div>
     </div>
 
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary" id="navbar1">
-        <div class="container" style="min-width:83%;">
-            <a class="navbar-brand mr-1 mb-1 mt-0" href="#">FLAM Sample Page</a>
-            <a class="nav-link text-light" href="https://zenodo.org/records/15866339" target="_blank">ASFX-SED
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light border-bottom" id="navbar1">
+        <div class="container" style="min-width:80%;">
+            <a class="navbar-brand mr-1 mb-1 mt-0 text-primary" href="#">FLAM Sample Page</a>
+            <a class="nav-link text-primary" href="https://zenodo.org/records/15866339" target="_blank">ASFX-SED
                 Dataset</a>
         </div>
     </nav>
@@ -127,10 +156,7 @@ url={https://openreview.net/forum?id=7fQohcFrxG}
             <p class="lead">
                 We released ASFX-SED dataset on <a href="https://zenodo.org/records/15866339" target="_blank"
                     style="color: #007bff; text-decoration: underline;">Zenodo</a>! Check it out for the dataset and
-                more details.
-            </p>
-            <p class="lead">
-                We will release the pre-trained model and the code soon!
+                more details. We will release the pre-trained model and the code soon!
             </p>
             <h2 class="text-primary my-4">FLAM Zero-Shot Detection Results on Real-world Examples</h2>
             <p class="lead">
@@ -220,6 +246,35 @@ url={https://openreview.net/forum?id=7fQohcFrxG}
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Abstract Section -->
+            <h2 class="text-primary my-4">Abstract</h2>
+            <!-- FLAM Diagram -->
+            <div class="text-center mb-4">
+                <img src="files/hero-diagram.png" width="70%" class="img-fluid" alt="FLAM Diagram">
+            </div>
+            <!-- Abstract Text -->
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <p class="lead">
+                        Recent multi-modal audio-language models (ALMs) excel at text-audio retrieval but
+                        struggle with frame-wise audio understanding. Prior works use temporal-aware labels or
+                        unsupervised training to improve frame-wise capabilities, but they still lack
+                        fine-grained labeling capability to pinpoint when an event occurs. While traditional
+                        sound event detection models can precisely localize events, they are limited to
+                        pre-defined categories, making them ineffective for real-world scenarios with
+                        out-of-distribution events. In this work, we introduce FLAM, an open-vocabulary
+                        contrastive audio-language model capable of localizing specific sound events. FLAM
+                        employs a memory-efficient and calibrated frame-wise objective with logit adjustment to
+                        address spurious correlations, such as event dependencies and label imbalances during
+                        training. To enable frame-wise supervision, we leverage a large-scale dataset with
+                        diverse audio events, LLM-generated captions and simulation. Experimental results and
+                        case studies demonstrate that FLAM significantly improves the open-vocabulary
+                        localization capability while maintaining strong performance in global retrieval and
+                        downstream tasks.
+                    </p>
                 </div>
             </div>
 
@@ -474,27 +529,8 @@ url={https://openreview.net/forum?id=7fQohcFrxG}
                 </div>
             </div>
         </div>
-        <div class="container" style="min-width:80%;">
-            <h3>FLAM</h3>
-            <div class="col-md-12">
-                <div class="card border-0 h-100">
-                    <div class="col my-auto">
-                        <img src="files/hero-diagram.png" width="100%" class="center">
-                    </div>
-                    <div class="row w-100   px-3">
-                        <p class=" px-3">
-                            (Left) Traditional ALMs derive global audio and text embeddings, treating each
-                            ground-truth audio--text pair as a positive sample and all other pairs in the batch as
-                            negatives.
-                            (Right) FLAM instead processes frame-level audio features and trains on temporally
-                            labeled sound events paired with text descriptions. FLAM enables finer-grained localization
-                            of events based on text queries, yielding accurate open-vocabulary sound event detection.
-                        </p>
-                    </div>
 
-                </div>
-            </div>
-        </div>
+
     </main>
 
     <footer id="footer" class="bg-dark text-light py-5">
@@ -527,25 +563,17 @@ url={https://openreview.net/forum?id=7fQohcFrxG}
                 const btn = document.getElementById('bibtexBtn');
                 const originalText = btn.innerHTML;
                 btn.innerHTML = '<i class="ion-checkmark"></i> Copied!';
-                btn.classList.remove('btn-outline-light');
+                btn.classList.remove('btn-outline-primary');
                 btn.classList.add('btn-success');
-
-                // Show the citation card temporarily
-                const citation = document.getElementById('bibtexCitation');
-                citation.classList.add('show');
 
                 // Reset after 3 seconds
                 setTimeout(function () {
                     btn.innerHTML = originalText;
                     btn.classList.remove('btn-success');
-                    btn.classList.add('btn-outline-light');
-                    citation.classList.remove('show');
+                    btn.classList.add('btn-outline-primary');
                 }, 3000);
             }).catch(function (err) {
                 console.error('Could not copy text: ', err);
-                // Fallback: show the citation card so user can select and copy manually
-                const citation = document.getElementById('bibtexCitation');
-                citation.classList.toggle('show');
             });
         }
     </script>

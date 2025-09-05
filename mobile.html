@@ -23,41 +23,90 @@
             transform: scale(2.0);
             z-index: 1000;
         }
+
+        /* Header alignment overrides: ensure consistent left edge */
+        .header-block p {
+            padding-left: 0;
+            padding-right: 0;
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+            text-align: left;
+        }
+
+        .header-block .bibtex-card {
+            padding: 0.75rem;
+        }
+
+        /* Tighten author and institution spacing */
+        .header-block .author-spacing {
+            padding-top: 0.125rem;
+            padding-bottom: 0.125rem;
+            margin-bottom: 0.15rem !important;
+            font-size: 1rem;
+        }
+
+        .header-block .institution-spacing {
+            padding-top: 0.125rem;
+            padding-bottom: 0.125rem;
+            margin-bottom: 0.25rem;
+            font-size: 0.8rem;
+        }
+
+        /* Reduce space before header ends */
+        #header-intro {
+            margin-bottom: 0;
+            padding-bottom: 0.25rem;
+        }
     </style>
 </head>
 
 <body data-spy="scroll" data-target="#navbar1" data-offset="60">
     <div class="container-fluid" style="min-width:80%;">
         <div class="row">
-            <div class="col-12 p-0 bg-primary vh-40 py-5">
+            <div class="col-12 p-0 bg-light pt-4 pb-3">
                 <div class="container" style="min-width:80%;">
                     <div class="row">
-                        <div class="col-xl-12 col-lg-12 py-2 text-light">
-                            <h2 class="display-5 mb-3">
+                        <div class="col-xl-12 col-lg-12 py-2 text-dark header-block">
+                            <h2 class="mb-3 text-primary">
                                 🍮 FLAM: Frame-Wise Language-Audio Modeling
                             </h2>
 
-                            <!-- Publication Links and Citation -->
-                            <div class="mb-4">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="d-flex flex-column gap-2 mb-3">
-                                            <a href="https://arxiv.org/abs/2505.05335" target="_blank"
-                                                class="btn btn-outline-light">
-                                                <i class="ion-document-text"></i> arXiv Paper
-                                            </a>
-                                            <button class="btn btn-outline-light" onclick="copyBibtex()" id="bibtexBtn">
-                                                <i class="ion-clipboard"></i> Copy BibTeX
-                                            </button>
-                                        </div>
-                                    </div>
+                            <!-- Authors -->
+                            <div class="mb-2">
+                                <p class="lead mb-1 author-spacing">
+                                    Yusong Wu<sup>1,2</sup>,
+                                    Christos Tsirigotis<sup>2</sup>,
+                                    Ke Chen<sup>1</sup>,
+                                    Cheng-Zhi Anna Huang<sup>3</sup>,
+                                    Aaron Courville<sup>2,4</sup>,
+                                    Oriol Nieto<sup>1</sup>,
+                                    Prem Seetharaman<sup>1</sup>,
+                                    Justin Salamon<sup>1</sup>
+                                </p>
+                                <p class="text-dark mb-1 institution-spacing">
+                                    <sup>1</sup>Adobe Research<br>
+                                    <sup>2</sup>Mila - Quebec AI Institute, Université de Montréal<br>
+                                    <sup>3</sup>Massachusetts Institute of Technology<br>
+                                    <sup>4</sup>Canada CIFAR AI Chair
+                                </p>
+                                <div class="d-flex align-items-center flex-wrap mb-2">
+                                    <span class="text-dark mr-2" style="font-size: 0.9rem; font-weight: 500;">ICML
+                                        2025</span>
+                                    <a href="https://arxiv.org/abs/2505.05335" target="_blank"
+                                        class="btn btn-outline-primary btn-sm mr-2">
+                                        <i class="ion-document-text"></i> Paper
+                                    </a>
+                                    <button class="btn btn-outline-primary btn-sm" onclick="copyBibtex()"
+                                        id="bibtexBtn">
+                                        <i class="ion-clipboard"></i> BibTeX
+                                    </button>
                                 </div>
+                            </div>
 
-                                <!-- BibTeX Citation (initially hidden) -->
-                                <div class="collapse" id="bibtexCitation">
-                                    <div class="card bg-light text-dark p-2">
-                                        <small><strong>ICML 2025 Citation:</strong></small>
-                                        <pre class="mb-0" style="font-size: 0.7em; white-space: pre-wrap;"><code>@inproceedings{
+                            <!-- BibTeX Citation (always visible) -->
+                            <div class="mb-3">
+                                <div class="card bg-white text-dark border bibtex-card">
+                                    <pre class="mb-0" style="font-size: 0.7em; white-space: pre-wrap;"><code>@inproceedings{
 wu2025flam,
 title={{FLAM}: Frame-Wise Language-Audio Modeling},
 author={Yusong Wu and Christos Tsirigotis and Ke Chen and Cheng-Zhi Anna Huang and Aaron Courville and Oriol Nieto and Prem Seetharaman and Justin Salamon},
@@ -65,11 +114,10 @@ booktitle={Forty-second International Conference on Machine Learning},
 year={2025},
 url={https://openreview.net/forum?id=7fQohcFrxG}
 }</code></pre>
-                                    </div>
                                 </div>
                             </div>
 
-                            <p class="lead">
+                            <p id="header-intro" class="lead text-dark">
                                 You are viewing the mobile version of this page. Please use computer for best viewing
                                 experience and check all examples.
                             </p>
@@ -80,9 +128,9 @@ url={https://openreview.net/forum?id=7fQohcFrxG}
         </div>
     </div>
 
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary" id="navbar1">
-        <div class="container" style="min-width:83%;">
-            <a class="navbar-brand mr-1 mb-1 mt-0" href="#">FLAM Sample Page</a>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light border-bottom" id="navbar1">
+        <div class="container" style="min-width:80%;">
+            <a class="navbar-brand mr-1 mb-1 mt-0 text-primary" href="#">FLAM Sample Page</a>
         </div>
     </nav>
 
@@ -218,25 +266,17 @@ url={https://openreview.net/forum?id=7fQohcFrxG}
                 const btn = document.getElementById('bibtexBtn');
                 const originalText = btn.innerHTML;
                 btn.innerHTML = '<i class="ion-checkmark"></i> Copied!';
-                btn.classList.remove('btn-outline-light');
+                btn.classList.remove('btn-outline-primary');
                 btn.classList.add('btn-success');
-
-                // Show the citation card temporarily
-                const citation = document.getElementById('bibtexCitation');
-                citation.classList.add('show');
 
                 // Reset after 3 seconds
                 setTimeout(function () {
                     btn.innerHTML = originalText;
                     btn.classList.remove('btn-success');
-                    btn.classList.add('btn-outline-light');
-                    citation.classList.remove('show');
+                    btn.classList.add('btn-outline-primary');
                 }, 3000);
             }).catch(function (err) {
                 console.error('Could not copy text: ', err);
-                // Fallback: show the citation card so user can select and copy manually
-                const citation = document.getElementById('bibtexCitation');
-                citation.classList.toggle('show');
             });
         }
     </script>
