@@ -30,17 +30,42 @@
             margin-bottom: 0.25rem !important;
         }
 
-        /* Header alignment overrides: ensure consistent left edge */
-        .header-block p {
+        /* Header alignment overrides: only center title/authors/venue */
+        .header-block h2 {
             padding-left: 0;
             padding-right: 0;
             padding-top: 0.25rem;
             padding-bottom: 0.25rem;
-            text-align: left;
+            text-align: center;
         }
+
         .header-block .bibtex-card {
             padding: 1rem;
         }
+
+        .header-block .author-spacing,
+        .header-block .institution-spacing {
+            text-align: center;
+        }
+
+        /* BibTeX box: keep text left-aligned */
+        .bibtex-card,
+        .bibtex-card pre,
+        .bibtex-card code {
+            text-align: left !important;
+        }
+
+        /* Fixed-height video presentation */
+        .fixed-video {
+            height: 700px;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            background: transparent;
+            display: block;
+            margin: 0 auto;
+        }
+
         /* Tighten author and institution spacing */
         .header-block .author-spacing {
             padding-top: 0.125rem;
@@ -48,12 +73,14 @@
             margin-bottom: 0.15rem !important;
             font-size: 1.1rem;
         }
+
         .header-block .institution-spacing {
             padding-top: 0.125rem;
             padding-bottom: 0.125rem;
             margin-bottom: 0.25rem;
             font-size: 0.9rem;
         }
+
         /* Reduce space before header ends */
         #header-intro {
             margin-bottom: 0;
@@ -71,7 +98,7 @@
 
 
 
-<body data-spy="scroll" data-target="#navbar1" data-offset="60">
+<body>
     <div class="container-fluid" style="min-width:80%;">
         <div class="row">
             <div class="col-12 p-0 bg-light pt-4 pb-3">
@@ -100,8 +127,9 @@
                                     <sup>3</sup>Massachusetts Institute of Technology &nbsp;&nbsp;
                                     <sup>4</sup>Canada CIFAR AI Chair
                                 </p>
-                                <div class="d-flex align-items-center mb-2">
-                                    <span class="text-dark mr-2" style="font-size: 1rem; font-weight: 500;">ICML 2025</span>
+                                <div class="d-flex align-items-center justify-content-center flex-wrap mb-2">
+                                    <span class="text-dark mr-2" style="font-size: 1rem; font-weight: 500;">ICML
+                                        2025</span>
                                     <a href="https://arxiv.org/abs/2505.05335" target="_blank"
                                         class="btn btn-outline-primary btn-sm mr-2">
                                         <i class="ion-document-text"></i> Paper
@@ -110,30 +138,85 @@
                                         id="bibtexBtn">
                                         <i class="ion-clipboard"></i> BibTeX
                                     </button>
+                                    <a href="https://zenodo.org/records/15866339" target="_blank"
+                                        class="btn btn-outline-primary btn-sm ml-2">
+                                        <i class="ion-archive"></i> Dataset
+                                    </a>
                                 </div>
                             </div>
 
                             <!-- BibTeX Citation (always visible) -->
                             <div class="mb-3">
                                 <div class="card bg-white text-dark border bibtex-card">
-                                    <h5 class="mb-2">BibTeX</h5>
-                                    <pre class="mb-0" style="font-size: 0.8em; margin: 0;"><code>@inproceedings{
-wu2025flam,
+                                    <pre class="mb-0" style="font-size: 0.8em; margin: 0;"><code>@inproceedings{wu2025flam,
 title={{FLAM}: Frame-Wise Language-Audio Modeling},
 author={Yusong Wu and Christos Tsirigotis and Ke Chen and Cheng-Zhi Anna Huang and Aaron Courville and Oriol Nieto and Prem Seetharaman and Justin Salamon},
 booktitle={Forty-second International Conference on Machine Learning},
 year={2025},
-url={https://openreview.net/forum?id=7fQohcFrxG}
-}</code></pre>
-                                    </div>
+url={https://openreview.net/forum?id=7fQohcFrxG}}</code></pre>
                                 </div>
+                            </div>
 
-                            <p id="header-intro" class="lead text-dark">
+                            <!-- Hero Video (merged examples 1–4) -->
+                            <div class="card mb-3" id="hero-video">
+                                <div class="card-body">
+                                    <h5 class="mb-2">FLAM Zero-Shot Detection Results on Real-world Examples</h5>
+                                    <p class="mb-3" style="font-size: 1rem;">
+                                        We present FLAM's zero-shot, open vocabulary sound event detection on real-world audio examples that are not
+                                        seen during training. <br>We also include detection results of events that are not present in the examples in red.
+                                    </p>
+                                    <video id="heroVideo" class="fixed-video" controls poster="files/sample_1_firstframe.png">
+                                        <source src="files/hero_merged.webm" type="video/webm">
+                                        <source src="files/hero_merged.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+
+                            <!-- Abstract Section (moved here, below hero video) -->
+                            <h2 class="text-primary my-4">Abstract</h2>
+                            <!-- FLAM Diagram -->
+                            <div class="text-center mb-4">
+                                <img src="files/hero-diagram.png" width="70%" class="img-fluid" alt="FLAM Diagram">
+                            </div>
+                            <!-- Abstract Text -->
+                            <div class="row justify-content-center">
+                                <div class="col-md-10">
+                                    <p class="lead text-left">
+                                        Recent multi-modal audio-language models (ALMs) excel at text-audio retrieval
+                                        but
+                                        struggle with frame-wise audio understanding. Prior works use temporal-aware
+                                        labels or
+                                        unsupervised training to improve frame-wise capabilities, but they still lack
+                                        fine-grained labeling capability to pinpoint when an event occurs. While
+                                        traditional
+                                        sound event detection models can precisely localize events, they are limited to
+                                        pre-defined categories, making them ineffective for real-world scenarios with
+                                        out-of-distribution events. In this work, we introduce FLAM, an open-vocabulary
+                                        contrastive audio-language model capable of localizing specific sound events.
+                                        FLAM
+                                        employs a memory-efficient and calibrated frame-wise objective with logit
+                                        adjustment to
+                                        address spurious correlations, such as event dependencies and label imbalances
+                                        during
+                                        training. To enable frame-wise supervision, we leverage a large-scale dataset
+                                        with
+                                        diverse audio events, LLM-generated captions and simulation. Experimental
+                                        results and
+                                        case studies demonstrate that FLAM significantly improves the open-vocabulary
+                                        localization capability while maintaining strong performance in global retrieval
+                                        and
+                                        downstream tasks.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Brief intro text -->
+                            <p id="header-intro" class="lead text-dark text-left">
                                 On this page, we showcase the audio samples and sound event detection results from the
-                                FLAM experiments, as
-                                discussed in the paper, as well as FLAM detection results on real-world audio examples
-                                that are not seen during training. Please allow a few seconds to load the video and
-                                audio.
+                                FLAM experiments, as discussed in the paper, as well as FLAM detection results on
+                                real-world audio examples that are not seen during training. Please allow a few seconds
+                                to load the video and audio.
                             </p>
                         </div>
                     </div>
@@ -142,22 +225,11 @@ url={https://openreview.net/forum?id=7fQohcFrxG}
         </div>
     </div>
 
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light border-bottom" id="navbar1">
-        <div class="container" style="min-width:80%;">
-            <a class="navbar-brand mr-1 mb-1 mt-0 text-primary" href="#">FLAM Sample Page</a>
-            <a class="nav-link text-primary" href="https://zenodo.org/records/15866339" target="_blank">ASFX-SED
-                Dataset</a>
-        </div>
-    </nav>
+    
 
     <main>
         <div class="container" style="min-width:80%;">
             <!-- FLAM Detection Results on Real-world Examples -->
-            <p class="lead">
-                We released ASFX-SED dataset on <a href="https://zenodo.org/records/15866339" target="_blank"
-                    style="color: #007bff; text-decoration: underline;">Zenodo</a>! Check it out for the dataset and
-                more details. We will release the pre-trained model and the code soon!
-            </p>
             <h2 class="text-primary my-4">FLAM Zero-Shot Detection Results on Real-world Examples</h2>
             <p class="lead">
                 We present FLAM's zero-shot, open vocabulary sound event detection on real-world audio examples that are
@@ -165,118 +237,7 @@ url={https://openreview.net/forum?id=7fQohcFrxG}
                 present in the examples in red. The title of each video links to the corresponding YouTube video.
             </p>
 
-            <div class="row">
-                <!-- First Video (left) -->
-                <div class="col-md-6">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <!-- Link to YouTube -->
-                            <div class="text-center mb-3">
-                                <a href="https://www.youtube.com/embed/ZsJz2TJAPjw?start=30&end=40"
-                                    target="_blank">example 1</a>
-                            </div>
-                            <!-- Local Video -->
-                            <div class="text-center mb-3">
-                                <video width="100%" height="640" controls>
-                                    <source src="files/sample_1.webm" type="video/webm">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Second Video (right) -->
-                <div class="col-md-6">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <!-- Link to YouTube -->
-                            <div class="text-center mb-3">
-                                <a href="https://www.youtube.com/embed/xIbceR97Ei8?start=30&end=40"
-                                    target="_blank">example 2</a>
-                            </div>
-                            <!-- Local Video -->
-                            <div class="text-center mb-3">
-                                <video width="100%" height="640" controls>
-                                    <source src="files/sample_2.webm" type="video/webm">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <!-- Third Video (left) -->
-                <div class="col-md-6">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <!-- Link to YouTube -->
-                            <div class="text-center mb-3">
-                                <a href="https://www.youtube.com/embed/tA1s65o_kYM?start=47&end=57"
-                                    target="_blank">example 3</a>
-                            </div>
-                            <!-- Local Video -->
-                            <div class="text-center mb-3">
-                                <video width="100%" height="640" controls>
-                                    <source src="files/sample_3.webm" type="video/webm">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fourth Video (right) -->
-                <div class="col-md-6">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <!-- Link to YouTube -->
-                            <div class="text-center mb-3">
-                                <a href="https://www.youtube.com/embed/tA1s65o_kYM?start=23&end=33"
-                                    target="_blank">example 4</a>
-                            </div>
-                            <!-- Local Video -->
-                            <div class="text-center mb-3">
-                                <video width="100%" height="640" controls>
-                                    <source src="files/sample_4.webm" type="video/webm">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Abstract Section -->
-            <h2 class="text-primary my-4">Abstract</h2>
-            <!-- FLAM Diagram -->
-            <div class="text-center mb-4">
-                <img src="files/hero-diagram.png" width="70%" class="img-fluid" alt="FLAM Diagram">
-            </div>
-            <!-- Abstract Text -->
-            <div class="row justify-content-center">
-                <div class="col-md-10">
-                    <p class="lead">
-                        Recent multi-modal audio-language models (ALMs) excel at text-audio retrieval but
-                        struggle with frame-wise audio understanding. Prior works use temporal-aware labels or
-                        unsupervised training to improve frame-wise capabilities, but they still lack
-                        fine-grained labeling capability to pinpoint when an event occurs. While traditional
-                        sound event detection models can precisely localize events, they are limited to
-                        pre-defined categories, making them ineffective for real-world scenarios with
-                        out-of-distribution events. In this work, we introduce FLAM, an open-vocabulary
-                        contrastive audio-language model capable of localizing specific sound events. FLAM
-                        employs a memory-efficient and calibrated frame-wise objective with logit adjustment to
-                        address spurious correlations, such as event dependencies and label imbalances during
-                        training. To enable frame-wise supervision, we leverage a large-scale dataset with
-                        diverse audio events, LLM-generated captions and simulation. Experimental results and
-                        case studies demonstrate that FLAM significantly improves the open-vocabulary
-                        localization capability while maintaining strong performance in global retrieval and
-                        downstream tasks.
-                    </p>
-                </div>
-            </div>
+            <!-- Abstract section moved above under the header -->
 
             <!-- New section: Sound Event Detection Results -->
             <h2 class="text-primary my-4">Sound Event Detection Results</h2>
@@ -546,6 +507,8 @@ url={https://openreview.net/forum?id=7fQohcFrxG}
         function toggleEnlarge(img) {
             img.classList.toggle("enlarged");
         }
+
+        // (Hero video is a merged file; no selector logic needed.)
 
         // Copy BibTeX citation to clipboard
         function copyBibtex() {

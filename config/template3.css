@@ -5,9 +5,9 @@ body,html {
   scroll-behavior: smooth;
 }
 
-/* body padding for fixed navbar */
+/* body padding for fixed navbar (disabled: navbar removed) */
 body {
-    padding-top: 56px;
+    padding-top: 0;
 }
 
 /* hidden spacer before sections for proper offset */
